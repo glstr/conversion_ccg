@@ -1,4 +1,5 @@
 
+#include "common_flag.h"
 #include "delaunay.h"
 #include "fileconv.h"
 #include "renderwin.h"
@@ -11,6 +12,11 @@ using namespace std;
 using namespace snow;
 
 int main(int argc, char* argv[]) {
+    gflags::ParseCommandLineFlags(&argc, &argv, true);
+    if (FLAGS_big_menu) {
+        cout << "right" << endl;
+    }
+
     if (argc < 3) {
         cout << "param error" << endl; 
         return 1;
