@@ -19,12 +19,13 @@ public:
 
     enum OpeType {
         VTKType = 0,
-        MType = 1,
+        PCLType = 1,
+        MType = 2,
     };
 
     void load(const std::string& file_path);
 
-    void output(const std::string& file_path, OpeType type=VTKType);
+    void output(const std::string& output_file, OpeType type=VTKType);
 
     void set_file_path(const std::string& file_path){
         _file_path = file_path;
@@ -33,7 +34,8 @@ public:
         return _file_path;
     }
 private:
-    void dela_impl(const std::string& file_path);
+    void dela_impl(const std::string& output_file);
+    void dela_impl_pcl(const std::string& output_file);
 
 private:
     std::string _file_path;
