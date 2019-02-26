@@ -16,17 +16,23 @@ enum OpeCode {
     TOM = 1,
     RENDER = 2,
     VTKTOM = 3,
-};
+    PCL = 4,
+    CGAL = 5,
+    };
 
 int get_ope_code(const std::string& ope_name) {
-    if (ope_name == "tovtk") {
-        return 0;
+    if (ope_name == "todela") {
+        return OpeCode::TOVTM;
     } else if (ope_name == "tom") {
-        return 1;
+        return OpeCode::TOM;
     } else if (ope_name == "render") {
-        return 2;
+        return OpeCode::RENDER;
     } else if (ope_name == "vtkToM") {
-        return 3;
+        return OpeCode::VTKTOM;
+    } else if (ope_name == "pcl") {
+        return OpeCode::PCL;
+    } else if (ope_name == "cgal") {
+        return OpeCode::CGAL;
     }
     return -1;
 }
@@ -60,6 +66,10 @@ int main(int argc, char* argv[]) {
         case RENDER:
             RenderWin::start(file_in);
             break;
+        case PCL:
+            break; 
+        case CGAL:
+            break;
         case VTKTOM:
             cout << "input file:" << file_in << endl;
             cout << "output file:" << file_out << endl;
@@ -69,33 +79,6 @@ int main(int argc, char* argv[]) {
             cout << "hello world" << endl;
             break;
     } 
-    //delete dela;
-    
-    //string flag(argv[1]); 
-    //if (flag == "-tovtk") {
-    //    std::string input_file(argv[2]);
-    //    std::string output_file(argv[3]);
-    //    cout << "input file:" <<  input_file << endl;
-    //    cout << "output file:" << output_file << endl;
-    //    Delaunay *dela = new Delaunay;
-    //    dela->load(input_file);
-    //    dela->output(output_file);
-    //    delete dela;
-    //} else if (flag == "-tom") {
-    //    cout << "to vtk" << endl;
-    //} else if (flag == "-render") {
-    //    std::string file_path(argv[2]);
-    //    RenderWin::start(file_path);
-    //} else if (flag == "-vtkToM") {
-    //    std::string input_file(argv[2]);
-    //    std::string output_file(argv[3]);
-    //    cout << "input file:" <<  input_file << endl;
-    //    cout << "output file:" << output_file << endl;
-    //    FileConv::vtkToM(input_file, output_file);
-    //}
-    //else {
-    //    cout << "hello world" << endl;
-    //}
     return 1;
 }
 

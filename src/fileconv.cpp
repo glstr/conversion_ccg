@@ -27,7 +27,6 @@ void FileConv::vtkToM(const std::string& file_in, const std::string& file_out) {
     reader->SetFileName(file_in.c_str());
     reader->Update();
     
-    cout << reader->GetOutput() << endl;
     vtkPolyData* data = reader->GetOutput();
     //获取点
     vtkPoints* points = data->GetPoints();
@@ -52,8 +51,6 @@ void FileConv::vtkToM(const std::string& file_in, const std::string& file_out) {
     vtkSmartPointer<vtkIdList> list =
         vtkSmartPointer<vtkIdList>::New();
     int i = 0;
-    cout << data->GetNumberOfPolys() << endl;
-    cout << cell_array->GetNextCell(list);
     while (cell_array->GetNextCell(list)) {
         cout << list << endl;
         int a = (int)list->GetId(0);
