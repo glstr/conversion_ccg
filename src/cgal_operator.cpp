@@ -5,7 +5,6 @@
 
 #include <CGAL/Polyhedron_3.h>
 #include <CGAL/Simple_cartesian.h>
-#include <CGAL/draw_polyhedron.h>
 
 namespace snow {
 typedef CGAL::Simple_cartesian<double> Kernel;
@@ -28,6 +27,8 @@ void CGALOperator::process() {
         case ShowExample:
             show_example();
             break;
+        case MakePolyhedron:
+            make_polyhedron();
         default:
             usage();
     } 
@@ -43,12 +44,14 @@ CGALOperator::OpCode CGALOperator::get_opcode() {
         return PolyhedronOpe;
     } else if (_flag == "show_example") {
         return ShowExample;
+    } else if (_flag == "make_polyhedron") {
+        return MakePolyhedron;
     }
     return UnKnown;
 }
 
 void CGALOperator::polyhedron_ope() {
-    
+        
 }
 
 void CGALOperator::hello_world() {
@@ -63,13 +66,17 @@ void CGALOperator::show_example() {
 }
 
 void CGALOperator::poly_simple() {
-    Polyhedron p;
-    Halfedge_handle h = p.make_tetrahedron();    
-    if (p.is_tetrahedron(h)) {
-        cout << "0" << endl;
-        //CGAL::draw(p);
-        return;
-    }
+    //Polyhedron p;
+    //Halfedge_handle h = p.make_tetrahedron();    
+    //if (p.is_tetrahedron(h)) {
+    //    cout << "0" << endl;
+    //    CGAL::draw(p);
+    //    return;
+    //}
+}
+
+void CGALOperator::make_polyhedron() {
+
 }
 
 void CGALOperator::usage() {

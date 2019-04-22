@@ -1,9 +1,10 @@
 
 #include "common_flag.h"
+#include "cgal_operator.h"
 #include "delaunay.h"
 #include "fileconv.h"
 #include "renderwin.h"
-
+#include "pcl_render.h"
 
 #include <iostream>
 #include <string>
@@ -22,28 +23,29 @@ enum OpeCode {
 
 int get_ope_code(const std::string& ope_name) {
     if (ope_name == "todela") {
-        return OpeCode::TOVTM;
+        return TOVTM;
     } else if (ope_name == "tom") {
-        return OpeCode::TOM;
+        return TOM;
     } else if (ope_name == "render") {
-        return OpeCode::RENDER;
+        return RENDER;
     } else if (ope_name == "vtkToM") {
-        return OpeCode::VTKTOM;
+        return VTKTOM;
     } else if (ope_name == "pcl") {
-        return OpeCode::PCL;
+        return PCL;
     } else if (ope_name == "cgal") {
-        return OpeCode::CGAL;
+        return CGAL;
     }
     return -1;
 }
 
 int main(int argc, char* argv[]) {
     gflags::ParseCommandLineFlags(&argc, &argv, true);
-        
+    cout << "enter" << endl;        
     int ope_code = get_ope_code(FLAGS_ope);
     std::string file_in(FLAGS_in);
     std::string file_out(FLAGS_out);
     Delaunay dela;
+    CGALOperator cgal_ope(file_in, file_out, FLAGS_arg);
     switch (ope_code) {
         case TOVTM:
             cout << "input file:" <<  file_in << endl;
@@ -64,11 +66,16 @@ int main(int argc, char* argv[]) {
             cout << "to vtk" << endl;
             break;
         case RENDER:
-            RenderWin::start(file_in);
+            cout << "render" << endl;
+            //RenderWin::start(file_in);
+            PCLRender::render(file_in); 
             break;
         case PCL:
+            cout << "pcl" << endl;
             break; 
         case CGAL:
+            cout << "cgal" << endl;
+            cgal_ope.process();
             break;
         case VTKTOM:
             cout << "input file:" << file_in << endl;

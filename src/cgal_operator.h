@@ -11,6 +11,7 @@ public:
         PolyhedronOpe = 1,
         HelloWorld = 2,
         ShowExample,
+        MakePolyhedron,
     };
 
     CGALOperator(const std::string& file_in, const std::string& file_out, 
@@ -32,6 +33,7 @@ private:
 
     //polyhedra example
     void poly_simple();
+    void make_polyhedron();
     
 
     std::string _file_in;
