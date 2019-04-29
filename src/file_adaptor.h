@@ -28,8 +28,8 @@ public:
     FileAdaptor(void) {}
     virtual ~FileAdaptor(void) {}
     static int get_cloud_from_file(const std::string& file_path, CloudPtr& cloud_ptr);
-
-    static int output_cloud_to_file();
+    static int output_cloud_to_file(const std::string& file_path, 
+            const Cloud* cloud_ptr);
 };
 
 } //end namespace snow;

@@ -5,6 +5,7 @@
 #include "fileconv.h"
 #include "renderwin.h"
 #include "pcl_render.h"
+#include "point_projector.h"
 
 #include <iostream>
 #include <string>
@@ -46,6 +47,9 @@ int main(int argc, char* argv[]) {
     std::string file_out(FLAGS_out);
     Delaunay dela;
     CGALOperator cgal_ope(file_in, file_out, FLAGS_arg);
+    PointProjector pp;
+    PointProjector::ModelPara mp;
+    int ret = 0;
     switch (ope_code) {
         case TOVTM:
             cout << "input file:" <<  file_in << endl;
@@ -72,6 +76,8 @@ int main(int argc, char* argv[]) {
             break;
         case PCL:
             cout << "pcl" << endl;
+            ret = pp.project_to_a_plane(file_in, file_out, mp);
+            cout << ret << endl;
             break; 
         case CGAL:
             cout << "cgal" << endl;

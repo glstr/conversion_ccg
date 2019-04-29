@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-#include <pcl/visualization/cloud_viewer.h>
+#include <pcl/visualization/pcl_visualizer.h>
 
 #include "file_adaptor.h"
 
@@ -18,11 +18,12 @@ void PCLRender::render(const std::string& file_path) {
         return;
     }
     
-    pcl::visualization::CloudViewer viewer("cloud");
-    viewer.showCloud(cloud_ptr);
+    pcl::visualization::PCLVisualizer viewer;
+    //viewer.showCloud(cloud_ptr);
+    viewer.addPointCloud(cloud_ptr);
 
     while(!viewer.wasStopped()) {
-     
+        viewer.spinOnce(); 
     }
 }
 
