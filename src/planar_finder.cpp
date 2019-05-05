@@ -36,6 +36,10 @@ int PlanarFinder::get_plane_from_cloud(CloudPtr pcloud, ModelPara& mp) {
     
     seg.setInputCloud (pcloud);
     seg.segment (*inliers, *coefficients);
+    mp.a = coefficients->values[0];
+    mp.b = coefficients->values[1];
+    mp.c = coefficients->values[2];
+    mp.d = coefficients->values[3];
     
     if (inliers->indices.size () == 0) {
         PCL_ERROR("Could not estimate a planar model for the given dataset.");

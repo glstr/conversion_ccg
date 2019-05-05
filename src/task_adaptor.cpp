@@ -6,6 +6,7 @@
 #include "fileconv.h"
 #include "renderwin.h"
 #include "pcl_render.h"
+#include "planar_finder.h"
 #include "point_projector.h"
 
 using namespace std;
@@ -69,9 +70,22 @@ int TaskAdaptor::pcl_task(TaskOption& options) {
     PointProjector pp;
     std::string file_in(options.file_in);
     std::string file_out(options.file_out);
-    ModelPara mp;
-    int ret = pp.project_to_a_plane(file_in, file_out, mp);
-    cout << ret << endl;
+    std::string arg(options.arg);
+    int ret = 0;
+    if (arg == "project") {
+        ModelPara mp;
+        ret = pp.project_to_a_plane(file_in, file_out, mp);
+        cout << ret << endl;
+    } else if (arg == "planar") {
+        PlanarFinder pf;
+        ModelPara mp;
+        ret = pf.get_plane_from_cloud(file_in, mp);
+        cout << "a: " << mp.a 
+            << "b: " << mp.b
+            << "c: " << mp.c
+            << "d: " << mp.d
+            << endl;
+    }
     return ret;
 }
 
