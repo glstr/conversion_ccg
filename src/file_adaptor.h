@@ -13,6 +13,19 @@ typedef pcl::PointCloud<pcl::PointXYZRGB>::Ptr CloudPtr;
 const int invalid_param = -1;
 const int ok = 0;
 
+struct ModelPara {
+        ModelPara() : 
+        a(0.0), 
+        b(1.0),
+        c(0.0), 
+        d(0.0) {}
+
+        float a;         
+        float b;
+        float c;
+        float d;
+};
+
 class FileAdaptor {
 public:
     struct VertexTemp {
@@ -27,9 +40,9 @@ public:
 
     FileAdaptor(void) {}
     virtual ~FileAdaptor(void) {}
-    static int get_cloud_from_file(const std::string& file_path, CloudPtr& cloud_ptr);
+    static int get_cloud_from_file(const std::string& file_path, Cloud& cloud);
     static int output_cloud_to_file(const std::string& file_path, 
-            const Cloud* cloud_ptr);
+            const Cloud& cloud);
 };
 
 } //end namespace snow;

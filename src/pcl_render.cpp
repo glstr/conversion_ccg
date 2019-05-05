@@ -10,17 +10,16 @@ using namespace std;
 
 namespace snow {
 void PCLRender::render(const std::string& file_path) {
-    CloudPtr cloud_ptr;
+    CloudPtr cloud(new Cloud);
     cout << "render:" << endl;
-    int ret = FileAdaptor::get_cloud_from_file(file_path, cloud_ptr);
+    int ret = FileAdaptor::get_cloud_from_file(file_path, *cloud);
     if (ret != 0) {
         cout << "ret:" << ret;
         return;
     }
     
     pcl::visualization::PCLVisualizer viewer;
-    //viewer.showCloud(cloud_ptr);
-    viewer.addPointCloud(cloud_ptr);
+    viewer.addPointCloud(cloud);
 
     while(!viewer.wasStopped()) {
         viewer.spinOnce(); 

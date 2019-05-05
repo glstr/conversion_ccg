@@ -4,7 +4,7 @@
 
 namespace snow {
 int FileAdaptor::get_cloud_from_file(const std::string& file_path, 
-        CloudPtr& cloud_ptr) {
+        Cloud& cloud) {
     if (file_path.empty()) {
         return invalid_param;
     }                 
@@ -14,7 +14,6 @@ int FileAdaptor::get_cloud_from_file(const std::string& file_path,
         return invalid_param;
     }
 
-    cloud_ptr.reset(new Cloud);
     while(!feof(fp)) {
         Point p;
         float time;
@@ -26,14 +25,14 @@ int FileAdaptor::get_cloud_from_file(const std::string& file_path,
         p.r = r;
         p.g = g;
         p.b = b;
-        cloud_ptr->push_back(p);
+        cloud.push_back(p);
     }
     fclose(fp);
     return ok;
 }
 
 int FileAdaptor::output_cloud_to_file(const std::string& file_path,
-        const Cloud* cloud) {
+        const Cloud& cloud) {
     if (file_path.empty()) {
         return invalid_param;
     }
@@ -43,14 +42,14 @@ int FileAdaptor::output_cloud_to_file(const std::string& file_path,
         return invalid_param;
     }
 
-    for (size_t i = 0; i < cloud->points.size (); ++i) {
+    for (size_t i = 0; i < cloud.points.size (); ++i) {
         float time = 1.0;
-        fprintf(fp, "%f %f %f %d %d %d %f\n", cloud->points[i].x,
-                cloud->points[i].y,
-                cloud->points[i].z,
-                cloud->points[i].r,
-                cloud->points[i].g,
-                cloud->points[i].b,
+        fprintf(fp, "%f %f %f %d %d %d %f\n", cloud.points[i].x,
+                cloud.points[i].y,
+                cloud.points[i].z,
+                cloud.points[i].r,
+                cloud.points[i].g,
+                cloud.points[i].b,
                 time);
     }     
     fclose(fp);
